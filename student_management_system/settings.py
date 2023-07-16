@@ -30,6 +30,7 @@ DEBUG = True
 
 # ALLOWED_HOSTS
 ALLOWED_HOSTS = ['*']  # Not recommended but useful in dev mode
+CURRENT_HOST = '127.0.0.1:8000'
 
 
 # Application definition
@@ -163,6 +164,13 @@ EMAIL_USE_TLS = False
 EMAIL_PORT = 465
 EMAIL_USE_SSL = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+# Stripe configuration
+STRIPE_PUBLISHABLE_KEY = 'pk_test_51NPXyRBOKJVEoMX2VU3PjTusNVhZf8Y1SRrCRiSkLoeHkUsvtm8fFzpwS0O5GGLp2ZOE71lTCY41BJZLTEODhyKl00urYbTjaW'
+STRIPE_SECRET_KEY = 'sk_test_51NPXyRBOKJVEoMX2qRmkxCIFJefVmPumoUR4zoPIADiBIkToENf9jhCeROshnDquPNgEvWWR8rU3udNNCD0q5FZF00Qo7MLVLc'
+
+# This is only required when using webhooks
+STRIPE_ENDPOINT_SECRET = '<your endpoint secret key here>'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 

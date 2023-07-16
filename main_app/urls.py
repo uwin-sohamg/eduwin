@@ -17,7 +17,7 @@ from django.urls import path
 
 from main_app.EditResultView import EditResultView
 
-from . import hod_views, staff_views, student_views, views
+from . import hod_views, staff_views, student_views, payment_views, views
 
 urlpatterns = [
     path("", views.login_page, name='login_page'),
@@ -129,5 +129,11 @@ urlpatterns = [
          name="student_view_notification"),
     path('student/view/result/', student_views.student_view_result,
          name='student_view_result'),
-
+    path('student/view/payment/', payment_views.HomePageView.as_view(), name='student_view_payment'),
+    path('config/', payment_views.stripe_config, name='payment'),
+    path('create-checkout-session/<int:amt>', payment_views.create_checkout_session),
+    path('create-checkout-session/', payment_views.create_checkout_session),
+    path('success/', payment_views.SuccessView.as_view()),
+    path('cancelled/', payment_views.CancelledView.as_view()),
+    path('webhook/', payment_views.stripe_webhook),
 ]
