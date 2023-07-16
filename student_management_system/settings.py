@@ -28,7 +28,7 @@ SECRET_KEY = 'qj*^@5q3y+^xy9f7ze^s-4+&b)-ky=eeufo0q%66p@%jp2e-%v'  # Consider us
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = ['smswithdjango.herokuapp.com']
+# ALLOWED_HOSTS
 ALLOWED_HOSTS = ['*']  # Not recommended but useful in dev mode
 
 
@@ -149,19 +149,20 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 AUTH_USER_MODEL = 'main_app.CustomUser'
 AUTHENTICATION_BACKENDS = ['main_app.EmailBackend.EmailBackend']
-TIME_ZONE = 'Africa/Lagos'
+TIME_ZONE = 'America/Toronto'
 
 # EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 # EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_mails")
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-
-EMAIL_HOST_USER = os.environ.get('EMAIL_ADDRESS') 
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
-EMAIL_USE_TLS = True
-# DEFAULT_FROM_EMAIL = "Student Management System <admin@admin.com>"
+EMAIL_HOST_USER = 'offers1sg@gmail.com'
+EMAIL_HOST_PASSWORD = 'Soham@0205'
+EMAIL_USE_TLS = False
+# EMAIL_PORT = 587
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
