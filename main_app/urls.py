@@ -110,6 +110,7 @@ urlpatterns = [
          name='edit_student_result'),
     path('staff/result/fetch/', staff_views.fetch_student_result,
          name='fetch_student_result'),
+    path('staff/upload/', staff_views.upload_file, name='staff_upload_file'),
 
 
 

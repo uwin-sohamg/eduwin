@@ -3,7 +3,7 @@ import json
 from django.contrib import messages
 from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import (HttpResponseRedirect, get_object_or_404,redirect, render)
+from django.shortcuts import (HttpResponseRedirect, get_object_or_404, redirect, render)
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 
@@ -62,9 +62,9 @@ def get_students(request):
         student_data = []
         for student in students:
             data = {
-                    "id": student.id,
-                    "name": student.admin.last_name + " " + student.admin.first_name
-                    }
+                "id": student.id,
+                "name": student.admin.last_name + " " + student.admin.first_name
+            }
             student_data.append(data)
         return JsonResponse(json.dumps(student_data), content_type='application/json', safe=False)
     except Exception as e:
@@ -86,7 +86,8 @@ def save_attendance(request):
 
         for student_dict in students:
             student = get_object_or_404(Student, id=student_dict.get('id'))
-            attendance_report = AttendanceReport(student=student, attendance=attendance, status=student_dict.get('status'))
+            attendance_report = AttendanceReport(student=student, attendance=attendance,
+                                                 status=student_dict.get('status'))
             attendance_report.save()
     except Exception as e:
         return None
@@ -193,7 +194,7 @@ def staff_feedback(request):
 
 def staff_view_profile(request):
     staff = get_object_or_404(Staff, admin=request.user)
-    form = StaffEditForm(request.POST or None, request.FILES or None,instance=staff)
+    form = StaffEditForm(request.POST or None, request.FILES or None, instance=staff)
     context = {'form': form, 'page_title': 'View/Update Profile'}
     if request.method == 'POST':
         try:
@@ -301,3 +302,23 @@ def fetch_student_result(request):
         return HttpResponse(json.dumps(result_data))
     except Exception as e:
         return HttpResponse('False')
+
+
+@csrf_exempt
+def upload_file(request):
+    if request.method == 'POST':
+        form = FileUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            file = form.cleaned_data['file']
+            # Process the uploaded file
+            # For example, you can save the file to a specific location
+            # or perform additional operations on the file data.
+            # Replace the line below with your desired file handling logic.
+            file_path = file.name
+            with open(file_path, 'wb') as destination:
+                for chunk in file.chunks():
+                    destination.write(chunk)
+            return render(request, 'upload_success.html')
+    else:
+        form = FileUploadForm()
+    return render(request, 'staff_template/staff_upload_file.html', {'form': form})

@@ -319,6 +319,16 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    {% url 'staff_upload_file' as staff_upload_file %}
+                    <a href="{{staff_upload_file}}" class="nav-link {% if staff_upload_file == request.path %} active {% endif %}">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                           Upload File
+
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     {% url 'staff_view_notification' as staff_view_notification %}
                     <a href="{{staff_view_notification}}" class="nav-link {% if staff_view_notification == request.path %} active {% endif %}">
                         <i class="nav-icon fas fa-th"></i>
@@ -328,7 +338,6 @@
                         </p>
                     </a>
                 </li>
-
                 <li class="nav-item">
                     {% url 'staff_apply_leave' as staff_apply_leave %}
                     <a href="{{staff_apply_leave}}" class="nav-link {% if staff_apply_leave == request.path %} active {% endif %}">
