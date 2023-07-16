@@ -595,7 +595,7 @@ def send_student_notification(request):
                 'title': "Student Management System",
                 'body': message,
                 'click_action': reverse('student_view_notification'),
-                'icon': static('dist/img/AdminLTELogo.png')
+                'icon': static('dist/img/EduWin-Logo-min.png')
             },
             'to': student.admin.fcm_token
         }
@@ -622,7 +622,7 @@ def send_staff_notification(request):
                 'title': "Student Management System",
                 'body': message,
                 'click_action': reverse('staff_view_notification'),
-                'icon': static('dist/img/AdminLTELogo.png')
+                'icon': static('dist/img/EduWin-Logo-min.png')
             },
             'to': staff.admin.fcm_token
         }
