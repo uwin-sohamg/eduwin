@@ -1,7 +1,6 @@
 /*!
- * AdminLTE v3.0.2 (https://adminlte.io)
- * Copyright 2014-2020 Colorlib <http://colorlib.com>
- * Licensed under MIT (https://github.com/ColorlibHQ/AdminLTE/blob/master/LICENSE)
+  * EduWin v1.0.0
+  * Licensed under MIT
  */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
@@ -11,8 +10,8 @@
 
   /**
    * --------------------------------------------
-   * AdminLTE ControlSidebar.js
-   * License MIT
+   * EduWin ControlSidebar.js
+   * Licensed under MIT
    * --------------------------------------------
    */
   var ControlSidebar = function ($) {
@@ -282,8 +281,8 @@
 
   /**
    * --------------------------------------------
-   * AdminLTE Layout.js
-   * License MIT
+   * EduWin Layout.js
+   * Licensed under MIT
    * --------------------------------------------
    */
   var Layout = function ($) {
@@ -490,8 +489,8 @@
 
   /**
    * --------------------------------------------
-   * AdminLTE PushMenu.js
-   * License MIT
+   * EduWin PushMenu.js
+   * Licensed under MIT
    * --------------------------------------------
    */
   var PushMenu = function ($) {
@@ -713,8 +712,8 @@
 
   /**
    * --------------------------------------------
-   * AdminLTE Treeview.js
-   * License MIT
+   * EduWin Treeview.js
+   * Licensed under MIT
    * --------------------------------------------
    */
   var Treeview = function ($) {
@@ -896,8 +895,8 @@
 
   /**
    * --------------------------------------------
-   * AdminLTE DirectChat.js
-   * License MIT
+   * EduWin DirectChat.js
+   * Licensed under MIT
    * --------------------------------------------
    */
   var DirectChat = function ($) {
@@ -984,8 +983,8 @@
 
   /**
    * --------------------------------------------
-   * AdminLTE TodoList.js
-   * License MIT
+   * EduWin TodoList.js
+   * Licensed under MIT
    * --------------------------------------------
    */
   var TodoList = function ($) {
@@ -1103,8 +1102,8 @@
 
   /**
    * --------------------------------------------
-   * AdminLTE CardWidget.js
-   * License MIT
+   * EduWin CardWidget.js
+   * Licensed under MIT
    * --------------------------------------------
    */
   var CardWidget = function ($) {
@@ -1347,8 +1346,8 @@
 
   /**
    * --------------------------------------------
-   * AdminLTE CardRefresh.js
-   * License MIT
+   * EduWin CardRefresh.js
+   * Licensed under MIT
    * --------------------------------------------
    */
   var CardRefresh = function ($) {
@@ -1510,8 +1509,8 @@
 
   /**
    * --------------------------------------------
-   * AdminLTE Dropdown.js
-   * License MIT
+   * EduWin Dropdown.js
+   * Licensed under MIT
    * --------------------------------------------
    */
   var Dropdown = function ($) {
@@ -1611,8 +1610,8 @@
 
   /**
    * --------------------------------------------
-   * AdminLTE Toasts.js
-   * License MIT
+   * EduWin Toasts.js
+   * Licensed under MIT
    * --------------------------------------------
    */
   var Toasts = function ($) {
