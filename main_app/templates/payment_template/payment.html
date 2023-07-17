@@ -37,9 +37,21 @@
                     <!-- /.card-header -->
                     <!-- form start -->
                     <div class="card-body">
-                        <div class="form-group">
-                            <label>Amount: </label>
-                            <input type="number" id="amount" placeholder="Enter Amount:" />
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label>Amount: </label>
+                                <input type="number" id="amount" name="amount" placeholder="Enter Amount:" />
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label>Currency: </label>
+                                <select id="currency" name="currency" class="form-control">
+                                    <option value="cad">(CAD) - Canadian Dollar</option>
+                                    <option value="usd">(USD) - United States Dollar</option>
+                                    <option value="inr">(INR) - Indian Rupees</option>
+                                </select>
+                            </div>
                         </div>
                         <button class="btn btn-primary btn-block" id="submitBtn">Make Payment!</button>
                     </div>

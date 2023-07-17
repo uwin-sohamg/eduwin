@@ -20,10 +20,10 @@ def stripe_config(request):
 
 
 @csrf_exempt
-def create_checkout_session(request, amt):
+def create_checkout_session(request, amt, curr):
     if request.method == 'GET':
         domain_url = settings.CURRENT_HOST
-        print(amt)
+        print(amt, curr)
         final_amount = str(amt*100) + ""
         stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -54,7 +54,7 @@ def create_checkout_session(request, amt):
                     {
                         'price_data': {
                             'unit_amount': final_amount,
-                            'currency': 'cad',
+                            'currency': curr,
                             'product_data': {
                                 'name': 'test',
                             },

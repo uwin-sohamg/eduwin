@@ -132,7 +132,7 @@ urlpatterns = [
          name='student_view_result'),
     path('student/view/payment/', payment_views.HomePageView.as_view(), name='student_view_payment'),
     path('config/', payment_views.stripe_config, name='payment'),
-    path('create-checkout-session/<int:amt>', payment_views.create_checkout_session),
+    path('create-checkout-session/<int:amt>/<str:curr>', payment_views.create_checkout_session),
     path('create-checkout-session/', payment_views.create_checkout_session),
     path('cancelled/', payment_views.CancelledView.as_view()),
     path('webhook/', payment_views.stripe_webhook),
