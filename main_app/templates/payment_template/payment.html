@@ -1,24 +1,55 @@
+{#{% load static %}#}
+{##}
+{#<!DOCTYPE html>#}
+{#<html>#}
+{#  <head>#}
+{#    <meta charset="utf-8">#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1">#}
+{#    <title>Django + Stripe Checkout</title>#}
+{#    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">#}
+{#    <script src="https://js.stripe.com/v3/"></script>#}
+{#    <script src="{% static 'main.js' %}"></script>#}
+{#    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>#}
+{#  </head>#}
+{#  <body>#}
+{#  <section class="section">#}
+{#    <br class="container">amount :#}
+{#        <input id="amount"/></br>#}
+{#        Product :#}
+{#        <label name="productname"> Item-1</label></br>#}
+{#      <button class="button is-primary" id="submitBtn">Purchase!</button>#}
+{#    </div>#}
+{#  </section>#}
+{#  </body>#}
+{#</html>#}
+{% extends 'main_app/base.html' %}
 {% load static %}
-
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Django + Stripe Checkout</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+{% block page_title %}{{page_title}}{% endblock page_title %}
+{% block content %}
+<section class="content">
+    <div class="container-fluid">
+        <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">{{page_title}}</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>Amount: </label>
+                            <input type="number" id="amount" placeholder="Enter Amount:" />
+                        </div>
+                        <button class="btn btn-primary btn-block" id="submitBtn">Make Payment!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block custom_js %}
     <script src="https://js.stripe.com/v3/"></script>
     <script src="{% static 'main.js' %}"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
-  </head>
-  <body>
-  <section class="section">
-    <br class="container">amount :
-        <input id="amount"/></br>
-        Product :
-        <label name="productname"> Item-1</label></br>
-      <button class="button is-primary" id="submitBtn">Purchase!</button>
-    </div>
-  </section>
-  </body>
-</html>
+{% endblock %}

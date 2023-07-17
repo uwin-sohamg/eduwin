@@ -134,7 +134,6 @@ urlpatterns = [
     path('config/', payment_views.stripe_config, name='payment'),
     path('create-checkout-session/<int:amt>', payment_views.create_checkout_session),
     path('create-checkout-session/', payment_views.create_checkout_session),
-    path('success/', payment_views.SuccessView.as_view()),
     path('cancelled/', payment_views.CancelledView.as_view()),
     path('webhook/', payment_views.stripe_webhook),
 ]

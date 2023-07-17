@@ -3,11 +3,14 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.http.response import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.views.generic.base import TemplateView
+from django.views.generic.base import TemplateView, View
+from django.shortcuts import render
 
 
-class HomePageView(TemplateView):
-    template_name = 'payment_template/payment.html'
+class HomePageView(View):
+    def get(self, request):
+        return render(request, 'payment_template/payment.html', {'page_title': 'Payments'})
+
 
 @csrf_exempt
 def stripe_config(request):
@@ -15,11 +18,12 @@ def stripe_config(request):
         stripe_config = {'publicKey': settings.STRIPE_PUBLISHABLE_KEY}
         return JsonResponse(stripe_config, safe=False)
 
+
 @csrf_exempt
 def create_checkout_session(request, amt):
     if request.method == 'GET':
         domain_url = settings.CURRENT_HOST
-        # Multiplying amt by 100 to convert entered cent value to dollar
+        print(amt)
         final_amount = str(amt*100) + ""
         stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -42,7 +46,7 @@ def create_checkout_session(request, amt):
 
             checkout_session = stripe.checkout.Session.create(
                 # client_reference_id=request.user.id if request.user.is_authenticated else None,
-                success_url=domain_url + 'success?session_id={CHECKOUT_SESSION_ID}',
+                success_url=domain_url + 'student/home?session_id={CHECKOUT_SESSION_ID}',
                 cancel_url=domain_url + 'cancelled/',
                 payment_method_types=['card'],
                 mode='payment',
@@ -143,12 +147,10 @@ def handle_checkout_session(session):
         pass
 
 
-class SuccessView(TemplateView):
-    template_name = 'payment_template/success.html'
-
-
-class CancelledView(TemplateView):
-    template_name = 'payment_template/cancelled.html'
+class CancelledView(View):
+    def get(self, request):
+        redirect_url = '/student/view/payment'
+        return render(request, 'main_app/redirect.html', {'redirect_url': redirect_url})
 
 
 @csrf_exempt

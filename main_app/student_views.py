@@ -14,7 +14,7 @@ from .forms import *
 from .models import *
 
 
-def student_home(request):
+def student_home(request, action=None):
     student = get_object_or_404(Student, admin=request.user)
     total_subject = Subject.objects.filter(course=student.course).count()
     total_attendance = AttendanceReport.objects.filter(student=student).count()
@@ -37,6 +37,12 @@ def student_home(request):
         subject_name.append(subject.name)
         data_present.append(present_count)
         data_absent.append(absent_count)
+    if request.GET:
+        try:
+            fetch_sess = request.GET['session_id']
+            action = 'success'
+        except:
+            action = None
     context = {
         'total_attendance': total_attendance,
         'percent_present': percent_present,
@@ -46,8 +52,8 @@ def student_home(request):
         'data_present': data_present,
         'data_absent': data_absent,
         'data_name': subject_name,
-        'page_title': 'Student Homepage'
-
+        'page_title': 'Student Homepage',
+        'action': action,
     }
     return render(request, 'student_template/home_content.html', context)
 

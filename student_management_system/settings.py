@@ -30,7 +30,7 @@ DEBUG = True
 
 # ALLOWED_HOSTS
 ALLOWED_HOSTS = ['*']  # Not recommended but useful in dev mode
-CURRENT_HOST = '127.0.0.1:8000'
+CURRENT_HOST = 'http://127.0.0.1:8000/'
 
 
 # Application definition
