@@ -56,7 +56,7 @@ def create_checkout_session(request, amt, curr):
                             'unit_amount': final_amount,
                             'currency': curr,
                             'product_data': {
-                                'name': 'test',
+                                'name': 'Student Accounts Payment',
                             },
                         },
                         'quantity': '1',
