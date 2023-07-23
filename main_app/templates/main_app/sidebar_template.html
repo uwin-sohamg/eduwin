@@ -329,6 +329,13 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    {% url 'staff_view_subjects' as staff_view_subjects %}
+                    <a href="{{staff_view_subjects}}" class="nav-link {% if staff_view_subjects == request.path %} active {% endif %}">
+                        <i class="nav-icon fas fa-eye"></i>
+                        <p>View Subjects</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     {% url 'staff_view_notification' as staff_view_notification %}
                     <a href="{{staff_view_notification}}" class="nav-link {% if staff_view_notification == request.path %} active {% endif %}">
                         <i class="nav-icon fas fa-bell"></i>
@@ -418,7 +425,7 @@
                 <li class="nav-item">
                     {% url 'student_view_subjects' as student_view_subjects %}
                     <a href="{{student_view_subjects}}" class="nav-link {% if student_view_subjects == request.path %} active {% endif %}">
-                        <i class="nav-icon fas fa-dollar-sign"></i>
+                        <i class="nav-icon fas fa-eye"></i>
                         <p>View Subjects</p>
                     </a>
                 </li>

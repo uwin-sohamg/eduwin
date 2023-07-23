@@ -303,6 +303,15 @@ def fetch_student_result(request):
     except Exception as e:
         return HttpResponse('False')
 
+def staff_view_subjects(request):
+    staff = get_object_or_404(Staff, admin=request.user)
+    subjects = Subject.objects.filter(staff=staff)
+    context = {
+        'subjects': subjects,
+        'page_title': 'View Subjects'
+    }
+    return render(request, "staff_template/staff_view_subjects.html", context)
+
 
 @csrf_exempt
 def upload_file(request):
