@@ -1,6 +1,6 @@
 import json
 import math
-from datetime import datetime
+import datetime
 
 from django.contrib import messages
 from django.core.files.storage import FileSystemStorage
@@ -76,8 +76,8 @@ def student_view_attendance(request):
         end = request.POST.get('end_date')
         try:
             subject = get_object_or_404(Subject, id=subject_id)
-            start_date = datetime.strptime(start, "%Y-%m-%d")
-            end_date = datetime.strptime(end, "%Y-%m-%d")
+            start_date = datetime.datetime.strptime(start, "%Y-%m-%d")
+            end_date = datetime.datetime.strptime(end, "%Y-%m-%d")
             attendance = Attendance.objects.filter(
                 date__range=(start_date, end_date), subject=subject)
             attendance_reports = AttendanceReport.objects.filter(
