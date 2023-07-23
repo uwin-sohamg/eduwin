@@ -68,5 +68,55 @@
         }
         })
     });
+
+    function getMembershipValue(sessionStartYear) {
+        console.log(sessionStartYear);
+        const year = new Date(sessionStartYear).getFullYear();
+        const fallStart = new Date(year, 8, 1); // 8 means September (January is 0)
+        const fallEnd = new Date(year, 11, 31);
+        const winterStart = new Date(year, 0, 1); // 0 means January
+        const winterEnd = new Date(year, 3, 30); // 3 means April
+        const summerStart = new Date(year, 4, 1); // 4 means May
+        const summerEnd = new Date(year, 7, 31); // 7 means August
+
+        if (sessionStartYear >= fallStart && sessionStartYear <= fallEnd) {
+            return "Fall " + year;
+        } else if (sessionStartYear >= winterStart && sessionStartYear <= winterEnd) {
+            return "Winter " + year;
+        } else if (sessionStartYear >= summerStart && sessionStartYear <= summerEnd) {
+            return "Summer " + year;
+        } else {
+            return "";
+        }
+    }
+
+    const sessionField = document.getElementById("id_session");
+    const membershipField = document.getElementById("id_membership");
+
+    function updateMembershipValue() {
+        const selectedSession = sessionField.value;
+        let sessionYear = new Date();
+        const url = `/get_session_data/${selectedSession}/`;
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                sessionYear = new Date(data.start_year);
+                sessionYear.setDate(sessionYear.getDate() + 1);
+                const membershipValue = getMembershipValue(sessionYear);
+                membershipField.value = membershipValue;
+                // You can now access the specific session data, e.g., data.id, data.start_year, data.end_year, etc.
+            })
+            .catch(error => {
+                console.error("Error fetching session data:", error);
+                membershipField.value = "";
+            });
+    }
+
+    sessionField.addEventListener("change", function () {
+        const selectedSessionValue = sessionField.options[sessionField.selectedIndex].text;
+
+        // Call the function to update the membership value based on the selected session
+        updateMembershipValue();
+    })
 </script>
 {% endblock custom_js %}
