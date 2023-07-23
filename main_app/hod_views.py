@@ -40,6 +40,17 @@ def admin_home(request):
     }
     return render(request, 'hod_template/home_content.html', context)
 
+def get_session_data(request, session_id):
+    try:
+        session = Session.objects.get(pk=session_id)
+        session_data = {
+            'id': session.id,
+            'start_year': session.start_year,
+            'end_year': session.end_year
+        }
+        return JsonResponse(session_data)
+    except Session.DoesNotExist:
+        return JsonResponse({'error': 'Session not found'}, status=404)
 
 def add_staff(request):
     form = StaffForm(request.POST or None, request.FILES or None)

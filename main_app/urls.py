@@ -82,6 +82,9 @@ urlpatterns = [
          hod_views.edit_course, name='edit_course'),
     path("subject/edit/<int:subject_id>",
          hod_views.edit_subject, name='edit_subject'),
+    path('get_session_data/<int:session_id>/',
+         hod_views.get_session_data, name='get_session_data'),
+
 
 
     # Staff
@@ -130,6 +133,8 @@ urlpatterns = [
          name="student_view_notification"),
     path('student/view/result/', student_views.student_view_result,
          name='student_view_result'),
+    path('student/view/subjects/', student_views.student_view_subjects,
+         name='student_view_subjects'),
     path('student/view/payment/', payment_views.HomePageView.as_view(), name='student_view_payment'),
     path('config/', payment_views.stripe_config, name='payment'),
     path('create-checkout-session/<int:amt>/<str:curr>', payment_views.create_checkout_session),

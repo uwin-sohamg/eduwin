@@ -56,13 +56,14 @@ class CustomUserForm(FormSettings):
 
 
 class StudentForm(CustomUserForm):
+    membership = forms.CharField(required=False, widget=forms.TextInput(attrs={'readonly': 'readonly'}))
     def __init__(self, *args, **kwargs):
         super(StudentForm, self).__init__(*args, **kwargs)
 
     class Meta(CustomUserForm.Meta):
         model = Student
         fields = CustomUserForm.Meta.fields + \
-            ['course', 'session']
+            ['course', 'session', 'membership']
 
 
 class AdminForm(CustomUserForm):

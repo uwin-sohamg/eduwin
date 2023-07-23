@@ -16,6 +16,7 @@ from .models import *
 
 def student_home(request, action=None):
     student = get_object_or_404(Student, admin=request.user)
+    course = student.course
     total_subject = Subject.objects.filter(course=student.course).count()
     total_attendance = AttendanceReport.objects.filter(student=student).count()
     total_present = AttendanceReport.objects.filter(student=student, status=True).count()
@@ -44,6 +45,7 @@ def student_home(request, action=None):
         except:
             action = None
     context = {
+        'course': course,
         'total_attendance': total_attendance,
         'percent_present': percent_present,
         'percent_absent': percent_absent,
@@ -115,6 +117,16 @@ def student_apply_leave(request):
             messages.error(request, "Form has errors!")
     return render(request, "student_template/student_apply_leave.html", context)
 
+def student_view_subjects(request):
+    student = get_object_or_404(Student, admin_id=request.user.id)
+    course = student.course
+    subjects = Subject.objects.filter(course=course)
+    context = {
+        'course': course,
+        'subjects': subjects,
+        'page_title': 'View Subjects'
+    }
+    return render(request, "student_template/student_view_subjects.html", context)
 
 def student_feedback(request):
     form = FeedbackStudentForm(request.POST or None)

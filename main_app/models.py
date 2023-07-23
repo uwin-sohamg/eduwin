@@ -1,3 +1,5 @@
+import datetime
+
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import UserManager
 from django.dispatch import receiver
@@ -36,6 +38,54 @@ class Session(models.Model):
 
     def __str__(self):
         return "From " + str(self.start_year) + " to " + str(self.end_year)
+
+@receiver(post_save, sender=Session)
+def create_or_update_membership(sender, instance, created, **kwargs):
+    """
+    Signal receiver to create or update the corresponding Membership instance
+    when a new Session is saved.
+    """
+    # Define the membership start and end dates for each category
+    year = instance.start_year.year
+    fall_start_date = datetime.date(year, 9, 1)
+    fall_end_date = datetime.date(year, 12, 31)
+    winter_start_date = datetime.date(year, 1, 1)
+    winter_end_date = datetime.date(year, 4, 30)
+    summer_start_date = datetime.date(year, 5, 1)
+    summer_end_date = datetime.date(year, 8, 31)
+
+    # Determine the membership category based on the start_year
+    if fall_start_date <= instance.start_year <= fall_end_date:
+        membership = Membership.FALL + " " + str(year)
+    elif winter_start_date <= instance.start_year <= winter_end_date:
+        membership = Membership.WINTER + " " + str(year)
+    elif summer_start_date <= instance.start_year <= summer_end_date:
+        membership = Membership.SUMMER + " " + str(year)
+    else:
+        # If the start_year doesn't fall within any of the defined ranges,
+        # set membership to None or raise an error, depending on your requirement.
+        membership = None
+
+    # Create or update the Membership instance
+    membership_instance, _ = Membership.objects.get_or_create(session=instance)
+    membership_instance.membership = membership
+    membership_instance.save()
+
+class Membership(models.Model):
+    FALL = 'Fall'
+    WINTER = 'Winter'
+    SUMMER = 'Summer'
+    MEMBERSHIP_CHOICES = [
+        (FALL, 'Fall'),
+        (WINTER, 'Winter'),
+        (SUMMER, 'Summer'),
+    ]
+
+    session = models.ForeignKey(Session, on_delete=models.CASCADE, default=None)
+    membership = models.CharField(max_length=10, choices=MEMBERSHIP_CHOICES, null=True, default=None)
+
+    def __str__(self):
+        return f"{self.session} - {self.get_membership_display()}"
 
 
 class CustomUser(AbstractUser):
