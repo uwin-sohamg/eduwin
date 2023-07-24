@@ -153,7 +153,7 @@ class LeaveReportStudentForm(FormSettings):
 
 class FeedbackStudentForm(FormSettings):
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args,   **kwargs):
         super(FeedbackStudentForm, self).__init__(*args, **kwargs)
 
     class Meta:

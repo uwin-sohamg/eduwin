@@ -16,13 +16,20 @@
                     <!-- /.card-header -->
                     <!-- form start -->
                     <div class="card-body">
+
                         <form method="post" enctype="multipart/form-data">
                               {% csrf_token %}
                               {{ form.as_p }}
                               <button type="submit">Upload</button>
                         </form>
                     </div>
-
+                    {% if message %}
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-12">{{ message }}</div>
+                        </div>
+                    </div>
+                    {% endif %}
                 </div>
                 <!-- /.card -->
 

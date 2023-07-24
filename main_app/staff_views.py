@@ -327,7 +327,8 @@ def upload_file(request):
             with open(file_path, 'wb') as destination:
                 for chunk in file.chunks():
                     destination.write(chunk)
-            return render(request, 'upload_success.html')
+            form = FileUploadForm()
+            return render(request, 'staff_template/staff_upload_file.html', {'form': form, 'page_title': 'Upload File', 'message': 'File saved successfully!'})
     else:
         form = FileUploadForm()
-    return render(request, 'staff_template/staff_upload_file.html', {'form': form})
+    return render(request, 'staff_template/staff_upload_file.html', {'form': form, 'page_title': 'Upload File'})
